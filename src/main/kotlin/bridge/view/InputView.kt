@@ -6,11 +6,10 @@ import camp.nextstep.edu.missionutils.Console
 class InputView {
     private val validator: InputValidator = InputValidator()
 
-    /**
-     * 다리의 길이를 입력받는다.
-     */
     fun readBridgeSize(): Int {
-        return 0
+        val input: String = Console.readLine().trim()
+        validator.checkInt(input, INVALID_BRIDGE_LENGTH)
+        return input.toInt()
     }
 
     /**
@@ -33,19 +32,7 @@ class InputView {
         return input
     }
 
-    fun inputInt(): Int {
-        val input: String = Console.readLine().trim()
-        validator.checkInt(input)
-        return input.toInt()
-    }
-
-    fun inputVisitDate(): Int {
-        val input: String = Console.readLine().trim()
-        validator.checkVisitDate(input, INVALID_DATE)
-        return input.toInt()
-    }
-
     companion object {
-        const val INVALID_DATE = "유효하지 않은 날짜입니다. "
+        const val INVALID_BRIDGE_LENGTH = "유효하지 않은 다리 길이입니다. "
     }
 }

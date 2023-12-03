@@ -1,6 +1,7 @@
 package bridge.model
 
 class Bridge(private val bridge: List<String>) {
+
     init {
         require(bridge.size in MIN_CNT..MAX_CNT) {throw (IllegalArgumentException(OUT_OF_RANGE))}
     }

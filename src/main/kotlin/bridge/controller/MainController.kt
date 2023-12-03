@@ -14,14 +14,14 @@ class MainController(
 ) {
     fun run() {
         printHello()
-        exceptionHandler.inputUntilSuccess { receiveBridgeLength() }
+        val bridge: Bridge = exceptionHandler.inputUntilSuccess { receiveBridgeLength() }
 
     }
 
     private fun printHello() = outputView.printHello()
 
-    private fun receiveBridgeLength() {
+    private fun receiveBridgeLength(): Bridge {
         outputView.printBridgeLength()
-        Bridge(BridgeMaker(BridgeRandomNumberGenerator()).makeBridge(inputView.inputInt()))
+        return Bridge(BridgeMaker(BridgeRandomNumberGenerator()).makeBridge(inputView.readBridgeSize()))
     }
 }
