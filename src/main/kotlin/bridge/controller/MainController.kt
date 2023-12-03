@@ -9,8 +9,7 @@ class MainController(
     private val outputView: OutputView,
     private val exceptionHandler: ExceptionHandler,
 ) {
-
     fun run() {
-    }
 
+    }
 }
