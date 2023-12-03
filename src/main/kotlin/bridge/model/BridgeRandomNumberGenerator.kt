@@ -1,6 +1,10 @@
-package bridge.util
+package bridge.model
 
 import camp.nextstep.edu.missionutils.Randoms
+
+/**
+ * 코드 변경 불가능
+ */
 
 class BridgeRandomNumberGenerator : BridgeNumberGenerator {
     override fun generate(): Int {

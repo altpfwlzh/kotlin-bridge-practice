@@ -3,6 +3,10 @@ package bridge.view
 import bridge.constants.ErrorMessage
 import bridge.constants.Strings
 
+/**
+ * 메서드의 이름은 변경 불가능, 인자와 반환 타입 변경 가능.
+ */
+
 class OutputView() {
     private val strings: Strings = Strings
     private val errorMessage: ErrorMessage = ErrorMessage
