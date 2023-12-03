@@ -8,27 +8,50 @@ package bridge.model
  */
 
 class BridgeGame {
-    /**
-     * 사용자가 칸을 이동할 때 사용하는 메서드
-     *
-     *
-     * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    fun move() {}
+    var movingRoute: MutableList<String> = mutableListOf()
+        private set
 
-    /**
-     * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-     *
-     *
-     * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
+    fun move(input: String) {
+        require((input == MOVING_DOWN_CHAR) || (input == MOVING_UP_CHAR)) {
+            throw IllegalArgumentException(INVALID_MOVING_CHAR)
+        }
+
+        movingRoute.add(input)
+    }
+
+    fun calculateMovingChar(locate: Int, bridgeChar: String, movingChar: String): String {
+        val isSelectedRoute: Boolean = isSelectedRoute(locate, movingChar)
+        val isMovingValid: Boolean = isMovingValid(bridgeChar, movingChar)
+        if(isSelectedRoute) {
+            if(isMovingValid) return MOVING_VALID_CHAR
+            return MOVING_INVALID_CHAR
+        }
+        return " "
+    }
+
+    fun isMovingValid(bridgeRoute: String, movingRoute: String): Boolean = (bridgeRoute == movingRoute)
+
+    fun isSelectedRoute(locate: Int, movingRoute: String): Boolean {
+        if(locate == 0 && movingRoute == MOVING_UP_CHAR) return true
+        if(locate == 1 && movingRoute == MOVING_DOWN_CHAR) return true
+        return false
+    }
+
     fun retry() {}
 
     companion object {
-        const val BRIDGE_DOWN_NUM = 0
-        const val BRIDGE_UP_NUM = 1
+        const val BRIDGE_SIZE = 2
+        const val BRIDGE_PRINT_START = "["
+        const val BRIDGE_PRINT_END = "]"
+        const val BRIDGE_PRINT_SEPARATOR = "|"
 
-        const val BRIDGE_DOWN_STRING = "D"
-        const val BRIDGE_UP_STRING = "U"
+        const val MOVING_DOWN_NUM = 0
+        const val MOVING_UP_NUM = 1
+        const val MOVING_DOWN_CHAR = "D"
+        const val MOVING_UP_CHAR = "U"
+        const val MOVING_VALID_CHAR = "O"
+        const val MOVING_INVALID_CHAR = "X"
+
+        const val INVALID_MOVING_CHAR = "유효하지 않은 이동 문자입니다."
     }
 }

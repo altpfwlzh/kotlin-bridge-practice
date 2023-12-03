@@ -2,6 +2,7 @@ package bridge.view
 
 import bridge.constants.ErrorMessage
 import bridge.constants.Strings
+import bridge.model.BridgeGame
 
 /**
  * 메서드의 이름은 변경 불가능, 인자와 반환 타입 변경 가능.
@@ -17,8 +18,15 @@ class OutputView() {
 
     fun printSpaceToMove() = println(strings.INPUT_SPACE_TO_MOVE)
 
-    fun printMap() {
-        //현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
+    fun printMap(bridge: List<String>, movingRoute: List<String>) {
+        repeat(BridgeGame.BRIDGE_SIZE) { locate ->
+            print(BridgeGame.BRIDGE_PRINT_START)
+            repeat(movingRoute.size) {
+                print(BridgeGame().calculateMovingChar(locate, bridge[it], movingRoute[it]))
+                if(it != movingRoute.lastIndex) print(BridgeGame.BRIDGE_PRINT_SEPARATOR)
+            }
+            println(BridgeGame.BRIDGE_PRINT_END)
+        }
     }
 
     fun printRestartOrQuit() = println(strings.INPUT_RESTART_OR_QUIT)

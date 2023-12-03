@@ -18,7 +18,7 @@ class BridgeMaker(private val bridgeNumberGenerator: BridgeNumberGenerator) {
     }
 
     private fun convertNumberByRule(num: Int): String {
-        if(num == BridgeGame.BRIDGE_DOWN_NUM) return BridgeGame.BRIDGE_DOWN_STRING
-        return BridgeGame.BRIDGE_UP_STRING
+        if(num == BridgeGame.MOVING_DOWN_NUM) return BridgeGame.MOVING_DOWN_CHAR
+        return BridgeGame.MOVING_UP_CHAR
     }
 }

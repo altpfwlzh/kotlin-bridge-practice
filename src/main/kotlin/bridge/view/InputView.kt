@@ -12,11 +12,10 @@ class InputView {
         return input.toInt()
     }
 
-    /**
-     * 사용자가 이동할 칸을 입력받는다.
-     */
     fun readMoving(): String {
-        return ""
+        val input: String = Console.readLine().trim()
+        validator.checkString(input)
+        return input
     }
 
     /**
@@ -24,12 +23,6 @@ class InputView {
      */
     fun readGameCommand(): String {
         return ""
-    }
-
-    fun inputString(): String {
-        val input: String = Console.readLine().trim()
-        validator.checkString(input)
-        return input
     }
 
     companion object {
