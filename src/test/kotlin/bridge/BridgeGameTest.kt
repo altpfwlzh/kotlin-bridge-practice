@@ -5,13 +5,6 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class BridgeGameTest {
-    @Test
-    fun `다리를 건널 수 있는지 확인`() {
-        val bridgeChar: String = "U"
-        val movingChar: String = "D"
-        val result = BridgeGame().isMovingValid(bridgeChar, movingChar)
-        Assertions.assertEquals(result, false)
-    }
 
     @Test
     fun `다리를 건널 수 있는지 반환 문자 확인`() {

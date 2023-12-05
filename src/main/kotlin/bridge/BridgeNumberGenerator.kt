@@ -1,4 +1,4 @@
-package bridge.model
+package bridge
 
 /**
  * 코드 변경 불가능

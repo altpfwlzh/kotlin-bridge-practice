@@ -1,10 +1,9 @@
 package bridge.controller
 
 import bridge.misc.ExceptionHandler
-import bridge.model.Bridge
 import bridge.model.BridgeGame
 import bridge.model.BridgeMaker
-import bridge.model.BridgeRandomNumberGenerator
+import bridge.BridgeRandomNumberGenerator
 import bridge.view.InputView
 import bridge.view.OutputView
 
@@ -13,24 +12,38 @@ class MainController(
     private val outputView: OutputView,
     private val exceptionHandler: ExceptionHandler,
 ) {
+    private val bridgeGame = BridgeGame()
+
     fun run() {
         printHello()
-        val bridge: Bridge = exceptionHandler.inputUntilSuccess { receiveBridgeLength() }
+        val bridge: List<String> = exceptionHandler.inputUntilSuccess { receiveBridgeLength() }
+
+        repeat(bridge.size) {
+            moveStep(bridge)
+            if(!canMove(bridge[it])) return
+        }
     }
 
     private fun printHello() = outputView.printHello()
 
-    private fun receiveBridgeLength(): Bridge {
+    private fun receiveBridgeLength(): List<String> {
         outputView.printBridgeLength()
-        return Bridge(BridgeMaker(BridgeRandomNumberGenerator()).makeBridge(inputView.readBridgeSize()))
+        return BridgeMaker(BridgeRandomNumberGenerator()).makeBridge(inputView.readBridgeSize())
     }
 
-    private fun moveStep() {
+    private fun moveStep(bridge: List<String>) {
         exceptionHandler.inputUntilSuccess { receiveMovingChar() }
+        val movingRoute: List<String> = bridgeGame.movingRoute
+
+        outputView.printMap(bridge, movingRoute)
+    }
+
+    private fun canMove(bridge: String): Boolean {
+        return bridgeGame.isMovingValid(bridge, bridgeGame.movingRoute.last())
     }
 
     private fun receiveMovingChar() {
         outputView.printSpaceToMove()
-        BridgeGame().move(inputView.readMoving())
+        bridgeGame.move(inputView.readMoving())
     }
 }

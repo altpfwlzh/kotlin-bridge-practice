@@ -31,7 +31,7 @@ class BridgeGame {
 
     fun isMovingValid(bridgeRoute: String, movingRoute: String): Boolean = (bridgeRoute == movingRoute)
 
-    fun isSelectedRoute(locate: Int, movingRoute: String): Boolean {
+    private fun isSelectedRoute(locate: Int, movingRoute: String): Boolean {
         if(locate == 0 && movingRoute == MOVING_UP_CHAR) return true
         if(locate == 1 && movingRoute == MOVING_DOWN_CHAR) return true
         return false
